@@ -1,4 +1,4 @@
-	
+from pymongo import MongoClient	
 
 
 client = None
@@ -10,8 +10,9 @@ def setInitialMongoParams():
 	global db 
 	global collection
 	#client = MongoClient("mongodb://admin1:admin@ds149124.mlab.com:49124/apiworldlocodb")
-	client = MongoClient("mongodb://admin1:admin@ds149144.mlab.com:49144/apiworldhackathon1")
-	db = client['apiworldhackathon1']
+	#client = MongoClient("mongodb://admin1:admin@ds149144.mlab.com:49144/apiworldhackathon1")
+	client = MongoClient("mongodb://127.0.0.1:27017")
+	db = client['apiworldhackathon']
 	collection = db['apiworldlocodb']
 
 def getMongoClient():

@@ -40,7 +40,7 @@ class WishListQuerier():
 				topresult['product']=store['products'][0]['title']
 				topresult['url']=store['products'][0]['url']
 				result.append(topresult)
-		return result[:5]
+		return result
 
 if __name__ == '__main__':
 	group = Group()

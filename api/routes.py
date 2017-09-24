@@ -8,8 +8,9 @@ api=MongoManager(getCollection())
 wlq=WishlistQuerier()
 
 
-@app.route('/<user>/<group>')
+@app.route('/<user>/<int:group>')
 def show_entries(user,group):
+	print(group)
 	groups=api.getDocs([{'id.id':group}])
 	obj=wq.queryWishlist(group,('37.4066001','-122.1451782'))
 	print(obj)
