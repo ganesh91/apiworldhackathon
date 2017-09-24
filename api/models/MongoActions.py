@@ -13,6 +13,8 @@ class MongoManager(object):
 	def insertOrUpdate(self,jsonobj):
 			if "_id" in jsonobj:
 				self.conn.replace_one({"_id":ObjectId(jsonobj['_id'])},jsonobj,True)
+			else:
+				self.conn.insert_one(jsonobj)
 
 	def getId(self,id):
 		return self.toModel(self.conn.find_one({"_id":ObjectId(id)})
