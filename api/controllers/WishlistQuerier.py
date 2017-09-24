@@ -16,7 +16,18 @@ class WishListQuerier():
 			query_response_wmart_geo=self.walmart.getNearestWalmart(geo)
 			query_response_wmart=self.walmart.searchItem(grpname)
 
-			print(query_response_wmart_geo,query_response_wmart)
+			if query_response_wmart['numItems'] > 0:
+				topresult={}
+				topresult['address']=",".join([query_response_wmart_geo['streetAddress'],query_response_wmart_geo['city'],query_response_wmart_geo['stateProvCode'],query_response_wmart_geo['zip']])
+				topresult['name']=query_response_wmart_geo['name']
+				topresult['geo']=",".join([str(query_response_wmart_geo['coordinates'][0]),str(query_response_wmart_geo['coordinates'][1])])
+				topresult['image']=query_response_wmart['items'][0]['thumbnailImage']
+				topresult['price']=query_response_wmart['items'][0]['salePrice']
+				if query_response_wmart['items'][0] and 'msrp' in query_response_wmart['items'][0]:
+					topresult['original_price']=query_response_wmart['items'][0]['msrp']
+				topresult['url']=query_response_wmart['items'][0]['productUrl']
+				topresult['product']=query_response_wmart['items'][0]['name']
+				result.append(topresult)
 
 			for store in query_response['stores']:
 				topresult={}
@@ -27,8 +38,9 @@ class WishListQuerier():
 				topresult['price']=store['products'][0]['price']
 				topresult['original_price']=store['products'][0]['original_price']
 				topresult['product']=store['products'][0]['title']
+				topresult['url']=store['products'][0]['url']
 				result.append(topresult)
-		return result
+		return result[:5]
 
 if __name__ == '__main__':
 	group = Group()

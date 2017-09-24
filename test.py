@@ -8,5 +8,4 @@ gp['id']={'id':hash(str(gp))}
 group.setDict(gp)
 wq=WishListQuerier()
 for i in wq.queryWishlist(group,('37.4066001','-122.1451782')):
-	# print(i)
-	pass
+	print(i)

@@ -17,23 +17,25 @@ class MongoManager(object):
 				self.conn.insert_one(jsonobj)
 
 	def getId(self,id):
-		return self.toModel(self.conn.find_one({"_id":ObjectId(id)})
+		return self.toModel(self.conn.find_one({"_id":ObjectId(id)}))
 
 	def getDocs(self,querys):
 		result=[]
 		for query in querys:
-			result+=self.conn.find(query)
+			result+=[i for i in self.conn.find(query)]
 		result_models = [self.toModel(i) for i in result]
 		return result_models
 
 	def toModel(self,result):
 		new_object=None
+		print(result)
 		if "type" in result:
-			if result['type'] == 'user':
+			if result['type']['id'] == 'User':
 				new_object = User()
-			if result['type'] == 'group':
+				new_object.setDict(result)
+			if result['type']['id'] == 'group':
 				new_object = Group()
-			new_object.setDict(result)
+				new_object.setDict(result)
 		return new_object
 
 	def toModels(self,resultset):

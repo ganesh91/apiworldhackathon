@@ -11,6 +11,7 @@ class WalmartAPIQuerier:
 		linkbuilder = linkbuilder.format(search)
 		paramstr="&".join([i[0]+'='+i[1] for i in params])
 		finalcallable=linkbuilder+'&'+paramstr
+		print(finalcallable)
 		return finalcallable
 
 	def getNearestWalmart(self,geo):
